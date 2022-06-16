@@ -1058,6 +1058,11 @@ hn_dev_close(struct rte_eth_dev *dev)
 	return ret;
 }
 
+static int hn_dev_mtu_set(struct rte_eth_dev *dev, uint16_t mtu)
+{
+	return hn_vf_mtu_set(dev, mtu);
+}
+
 static const struct eth_dev_ops hn_eth_dev_ops = {
 	.dev_configure		= hn_dev_configure,
 	.dev_start		= hn_dev_start,
@@ -1087,6 +1092,8 @@ static const struct eth_dev_ops hn_eth_dev_ops = {
 	.xstats_get		= hn_dev_xstats_get,
 	.xstats_get_names	= hn_dev_xstats_get_names,
 	.xstats_reset		= hn_dev_xstats_reset,
+	.mtu_set                = hn_dev_mtu_set,
+
 };
 
 /*
